@@ -185,6 +185,7 @@ var SnapSlider = /*#__PURE__*/function () {
       prev: /(prev|back|before|left|up)/,
       next: /(next|forward|after|right|down)/
     };
+    this.enableFocus = false;
     /* eslint-disable quote-props */
 
     this.callbacks = {
@@ -353,9 +354,12 @@ var SnapSlider = /*#__PURE__*/function () {
 
       var slides = selector ? Object(_helpers_getElements__WEBPACK_IMPORTED_MODULE_6__["default"])(selector, container) : Object(_helpers_toArray__WEBPACK_IMPORTED_MODULE_16__["default"])(container.children); // Ensure all slides are focusable but not tabbable.
 
-      slides.forEach(function (slide) {
-        return slide.setAttribute('tabindex', '-1');
-      }); // Return array of slides.
+      if (this.enableFocus) {
+        slides.forEach(function (slide) {
+          return slide.setAttribute('tabindex', '-1');
+        });
+      } // Return array of slides.
+
 
       return slides;
     }

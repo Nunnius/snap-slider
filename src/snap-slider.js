@@ -49,6 +49,8 @@ class SnapSlider {
       next: /(next|forward|after|right|down)/,
     };
 
+    this.enableFocus = false;
+
     /* eslint-disable quote-props */
     this.callbacks = {
       'load': [],
@@ -235,7 +237,9 @@ class SnapSlider {
       : toArray(container.children);
 
     // Ensure all slides are focusable but not tabbable.
-    slides.forEach((slide) => slide.setAttribute('tabindex', '-1'));
+    if (this.enableFocus) {
+      slides.forEach((slide) => slide.setAttribute('tabindex', '-1'));
+    }
 
     // Return array of slides.
     return slides;
