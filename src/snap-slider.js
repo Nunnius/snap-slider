@@ -1112,32 +1112,6 @@ class SnapSlider {
       event.preventDefault();
     }, 250);
 
-    // Focus listener. Save so we can remove it during `destroy()`.
-    this.focusListener = (event) => {
-      // Only trigger `goto` on focus when we're not passively scrolling.
-      // However, if someone manually triggered a transition then
-      // allow them to click or tab away to a different slide.
-      if (this.scrolling && !this.transition) {
-        return;
-      }
-
-      // Get slide + index.
-      let slide;
-      let index;
-
-      this.slides.forEach((s, i) => {
-        if (s.contains(event.target)) {
-          slide = s;
-          index = i + 1;
-        }
-      }, null);
-
-      // If there's a matching slide, go to it.
-      if (slide) {
-        this.goto(index, null, event);
-      }
-    };
-
     // Resize Observer. Save so we can disconnect it during `destroy()`.
     // Only init if browser supports it, else fallback to noop.
     this.resizeObserver = { observe: () => {}, disconnect: () => {} };
